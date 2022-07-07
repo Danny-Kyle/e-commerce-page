@@ -1,7 +1,7 @@
 import React from "react";
 import avatar from "../images/image-avatar.png";
 import logo from "../images/logo.svg";
-import cart from "../images/icon-cart.svg";
+import svg from "../images/icon-cart.svg";
 import NavbarButtons from "./NavbarButtons";
 import NavbarIconButtons from "./NavbarIconButtons";
 import MenuIcon from "../images/icon-menu.svg";
@@ -13,7 +13,7 @@ export const Navbar = ({
   items,
   eventualPrice,
   price,
-  order,
+  cart,
   setToggleDropdown,
   toggleMenu,
   deleteFromCart,
@@ -34,10 +34,6 @@ export const Navbar = ({
                   onClick={() => setToggleMenu(!toggleMenu)}
                 >
                   <img src={MenuIcon} alt="MenuIcon" />
-                  <path
-                    fillRule="EvenOdd"
-                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                  ></path>
                 </button>
                 <button
                   type="button"
@@ -47,10 +43,6 @@ export const Navbar = ({
                   onClick={() => setToggleMenu(!toggleMenu)}
                 >
                   <img src={MenuClose} alt="MenuIcon" />
-                  <path
-                    fillRule="EvenOdd"
-                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                  ></path>
                 </button>
               </div>
 
@@ -81,7 +73,7 @@ export const Navbar = ({
                   className="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none"
                   onClick={() => setToggleDropdown(!toggleDropdown)}
                 >
-                  <NavbarIconButtons src={cart} alt="cart" />
+                  <NavbarIconButtons src={svg} alt="cart" />
                 </div>
 
                 <div
@@ -99,32 +91,40 @@ export const Navbar = ({
 
                   <hr className="border-gray-200 dark:border-gray-700" />
                   <div>
-                    <p
-                      className={`block px-4 ${
-                        order ? "hidden" : "visible"
-                      } py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white`}
-                    >
-                      Your Cart is Empty
-                    </p>
-                    <CartCheckout
-                      items={items}
-                      eventualPrice={eventualPrice}
-                      deleteFromCart={deleteFromCart}
-                      price={price}
-                      order={order}
-                    />
+                    {cart ? (
+                       <CartCheckout
+                       items={items}
+                       eventualPrice={eventualPrice}
+                       deleteFromCart={deleteFromCart}
+                       price={price}
+                       cart={cart}
+                     />
+                    ) : (
+                      <p
+                        className={`block px-4 ${
+                          ''
+                        } py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white`}
+                      >
+                        Your Cart is Empty
+                      </p>
+                     
+                    )}
                   </div>
                 </div>
               </div>
 
-              <button type="button" className="flex items-center">
+              <div type="button" className="flex items-center">
                 <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                  <NavbarIconButtons src={avatar} alt="avatar" />
+                  <NavbarIconButtons
+                    src={avatar}
+                    alt="avatar"
+                    onClick={() => setToggleDropdown(!toggleDropdown)}
+                  />
                 </div>
                 <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 hidden">
                   User 1
                 </h3>
-              </button>
+              </div>
             </div>
           </div>
         </div>

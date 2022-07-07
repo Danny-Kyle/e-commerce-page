@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import minus from "../images/icon-minus.svg";
 import plus from "../images/icon-plus.svg";
-import cart from "../images/icon-cart-2.svg";
+import svg from "../images/icon-cart-2.svg";
 import Thumbnail from "./Thumbnail";
 import FunctionButtons from "./FunctionButtons";
 import images from "./images-data.js";
 
-export const Body = ({ price, order, setOrder, items, setItems }) => {
+export const Body = ({ price, cart, setCart, items, setItems }) => {
   const [currentImage, setCurrentImage] = useState(images[0]);
   function updateImage(ImageIDE) {
     setCurrentImage(images[ImageIDE]);
   }
+
   const addToCart = () => {
     if (items > 0) {
-      setOrder(!order);
+      setCart(true);
     }
   };
 
-  const addItems = () => {
+  const increment = () => {
     if (items >= 0 && items < 10) {
       setItems(items + 1);
-    } else {
     }
   };
-  const subtractItems = () => {
+
+  const decrement = () => {
     if (items > 0) {
       setItems(items - 1);
-    } else {
     }
   };
 
@@ -38,7 +38,14 @@ export const Body = ({ price, order, setOrder, items, setItems }) => {
             <img src={currentImage} alt="sneakers" className="rounded-3xl" />
           </div>
           <div className="mt-8 flex space-x-3">
-            <Thumbnail
+            {images.map((image, index) => (
+              <Thumbnail
+                imageId={index}
+                onClick={() => updateImage(index)}
+                currentImage={currentImage}
+              />
+            ))}
+            {/* <Thumbnail
               imageId={0}
               onClick={() => updateImage(0)}
               currentImage={currentImage}
@@ -57,7 +64,7 @@ export const Body = ({ price, order, setOrder, items, setItems }) => {
               imageId={3}
               onClick={() => updateImage(3)}
               currentImage={currentImage}
-            />
+            /> */}
           </div>
         </div>
         <div className="mt-12 w-96">
@@ -85,15 +92,15 @@ export const Body = ({ price, order, setOrder, items, setItems }) => {
           </div>
           <div className="md:flex md:space-x-2">
             <div className="flex border w-96 md:w-36 h-12 my-2 justify-evenly rounded-md space-x-4 bg-slate-200">
-              <FunctionButtons src={minus} onClick={subtractItems} />
+              <FunctionButtons src={minus} onClick={decrement} />
               <div className="py-2">{items}</div>
-              <FunctionButtons src={plus} onClick={addItems} />
+              <FunctionButtons src={plus} onClick={increment} />
             </div>
             <button
               className="flex border justify-center gap-x-4 my-2 pt-2 hover:bg-orange-300 bg-orange-400 md:w-60 w-96 h-12 text-center text-slate-100 rounded-md font-semibold"
               onClick={() => addToCart()}
             >
-              <img src={cart} alt="cart" className="h-6" />
+              <img src={svg} alt="cart" className="h-6" />
               <p>Add to cart</p>
             </button>
           </div>

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Body } from "./components/Body";
 import { Navbar } from "./components/Navbar";
+const PRICE = 125;
 
 const App = () => {
-  const price = 125;
   const [items, setItems] = useState(0);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [order, setOrder] = useState(false);
-  const eventualPrice = items * price;
+  const [cart, setCart] = useState(false);
+  const eventualPrice = items * PRICE;
+
   const deleteFromCart = () => {
-    setItems(items - items);
+    setCart(false);
+    setItems(0);
   };
 
   return (
@@ -20,19 +22,19 @@ const App = () => {
         setToggleDropdown={setToggleDropdown}
         toggleMenu={toggleMenu}
         items={items}
-        price={price}
-        order={order}
+        price={PRICE}
+        cart={cart}
         deleteFromCart={deleteFromCart}
         setToggleMenu={setToggleMenu}
         eventualPrice={eventualPrice}
       />
       <Body
-        price={price}
+        price={PRICE}
         items={items}
         setItems={setItems}
         eventualPrice={eventualPrice}
-        order={order}
-        setOrder={setOrder}
+        cart={cart}
+        setCart={setCart}
       />
     </div>
   );

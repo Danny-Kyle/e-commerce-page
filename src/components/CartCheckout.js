@@ -3,7 +3,7 @@ import thumbnail from "../images/image-product-0-thumbnail.jpg";
 import Bin from "../images/icon-delete.svg";
 
 export const CartCheckout = ({
-  order,
+  cart,
   deleteFromCart,
   price,
   eventualPrice,
@@ -11,7 +11,8 @@ export const CartCheckout = ({
 }) => {
   //   const checkout =
   return (
-    <div className={`py-4 ${order && items > 0 ? "visible" : "hidden"} px-2`}>
+    // <div className={`py-4 ${cart && items > 0 ? "visible" : "hidden"} px-2`}>
+      <div className={`py-4 ${cart && items > 0 ? "visible" : "hidden"} px-2`}>
       <div className="flex gap-x-3 py-2">
         <div className="flex gap-x-2">
           <img src={thumbnail} alt="" className="rounded-lg h-12 w-12" />
